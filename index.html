@@ -1,418 +1,182 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 25.8.3.2 (Windows)"/>
-	<meta name="created" content="2026-02-18T21:56:47.651854800"/>
-	<meta name="changed" content="2026-02-18T22:00:01.522004500"/>
-	<style type="text/css">
-		@page { size: 21cm 29.7cm; margin: 2cm }
-		p { line-height: 115%; margin-bottom: 0.25cm; background: transparent }
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário Nutri Inteligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #28a745;
+            --secondary-color: #1c1c1c;
+            --bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            padding: 20px;
+            color: var(--secondary-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--primary-color);
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 17px;
+            line-height: 1.4;
+        }
+
+        input[type="text"], 
+        input[type="email"], 
+        input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: var(--primary-color); box-shadow: 0 0 8px rgba(40,167,69,0.2); }
+
+        .options-container { display: grid; gap: 12px; }
+
+        .option-item { position: relative; }
+
+        .option-item input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .option-item label {
+            display: block;
+            background: #fff;
+            border: 2px solid #eee;
+            padding: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-bottom: 0;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .option-item input[type="radio"]:checked + label {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: scale(1.02);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.5);
+        }
+
+        footer { margin-top: 40px; font-size: 13px; color: #777; }
+    </style>
 </head>
-<body lang="pt-BR" link="#000080" vlink="#800000" dir="ltr"><p style="margin-bottom: 0cm; line-height: 100%">
-&lt;!DOCTYPE html&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">&lt;html
-lang=&quot;pt-br&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">&lt;head&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">    &lt;meta
-charset=&quot;UTF-8&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">    &lt;meta
-name=&quot;viewport&quot; content=&quot;width=device-width,
-initial-scale=1.0&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">   
-&lt;title&gt;Questionário Nutri Inteligente - Personalizado&lt;/title&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">    &lt;link
-href=&quot;https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap&quot;
-rel=&quot;stylesheet&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">    &lt;style&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        :root {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
---primary-color: #28a745; /* Verde Nutri */</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
---secondary-color: #1c1c1c; /* Preto elegante */</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
---bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
---shadow: 0 10px 30px rgba(0,0,0,0.08);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+<body>
 
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        * {
-box-sizing: border-box; }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+    <div class="header">
+        <h1>Análise Nutricional Personalizada</h1>
+        <p>Preencha os campos abaixo para receber seu diagnóstico por e-mail.</p>
+    </div>
 
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        body {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-family: 'Montserrat', sans-serif;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-background: var(--bg-gradient);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            margin:
-0;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            padding:
-20px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            color:
-var(--secondary-color);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-min-height: 100vh;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            display:
-flex;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-flex-direction: column;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-align-items: center;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+    <div class="container">
+        <form action="https://formspree.io/f/mzdavyjp" method="POST">
+            
+            <div class="card">
+                <label>Qual seu nome completo?</label>
+                <input type="text" name="Nome" placeholder="Digite aqui..." required>
+            </div>
 
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        .header {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-text-align: center;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-margin-bottom: 30px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-max-width: 600px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+            <div class="card">
+                <label>Qual seu principal objetivo hoje?</label>
+                <div class="options-container">
+                    <div class="option-item">
+                        <input type="radio" id="obj1" name="Objetivo" value="Emagrecer" required>
+                        <label for="obj1">Emagrecer Saudável</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="obj2" name="Objetivo" value="Massa">
+                        <label for="obj2">Ganhar Massa Muscular</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" id="obj3" name="Objetivo" value="Energia">
+                        <label for="obj3">Ter mais Energia e Disposição</label>
+                    </div>
+                </div>
+            </div>
 
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        .header h1 {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-size: 28px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-weight: 700;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            color:
-var(--primary-color);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-margin-bottom: 10px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+            <div class="card">
+                <label>Seu melhor e-mail para receber o plano:</label>
+                <input type="email" name="_replyto" placeholder="exemplo@email.com" required>
+            </div>
 
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        .container {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            width:
-100%;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-max-width: 550px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+            <button type="submit" class="btn-submit">Gerar Meu Plano Agora</button>
+            
+            <input type="hidden" name="_subject" value="Novo Lead: Questionário Nutri">
+        </form>
+    </div>
 
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        form {
-width: 100%; }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+    <footer>
+        &copy; 2026 Nutri Inteligente | Tecnologia de Análise de Dados
+    </footer>
 
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        /* Estilo
-dos Cards de Pergunta */</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        .card {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-background: #fff;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-border-radius: 15px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            padding:
-30px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-margin-bottom: 20px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-box-shadow: var(--shadow);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-border-left: 5px solid var(--primary-color);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        label {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            display:
-block;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-weight: 600;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-margin-bottom: 15px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-size: 16px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">       
-input[type=&quot;text&quot;], 
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">       
-input[type=&quot;email&quot;], 
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">       
-input[type=&quot;number&quot;],</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        select {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            width:
-100%;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            padding:
-12px 15px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            border:
-2px solid #eee;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-border-radius: 8px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-size: 15px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-family: inherit;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-transition: all 0.3s ease;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        input:focus
-{</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-border-color: var(--primary-color);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            outline:
-none;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-background: #fdfdfd;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        /* Botões
-de Opção Estilizados */</p>
-<p style="margin-bottom: 0cm; line-height: 100%">       
-.options-container {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            display:
-grid;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            gap:
-10px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        .option-item
-{</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-position: relative;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        .option-item
-input[type=&quot;radio&quot;] {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            display:
-none;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        .option-item
-label {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            display:
-block;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-background: #f8f9fa;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            border:
-2px solid #eee;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            padding:
-15px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-border-radius: 10px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            cursor:
-pointer;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-weight: 400;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-margin-bottom: 0;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-transition: all 0.2s;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-text-align: center;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        .option-item
-input[type=&quot;radio&quot;]:checked + label {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-background: var(--primary-color);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            color:
-white;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-border-color: var(--primary-color);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-weight: 600;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        /* Botão de
-Envio (CTA) */</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        .btn-submit
-{</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            width:
-100%;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-background: var(--primary-color);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            color:
-white;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            border:
-none;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            padding:
-18px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-size: 18px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-weight: 700;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-border-radius: 10px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            cursor:
-pointer;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-text-transform: uppercase;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-letter-spacing: 1px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-transition: transform 0.2s, background 0.3s;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-margin-top: 10px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">       
-.btn-submit:hover {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-background: #218838;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-transform: translateY(-2px);</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        footer {</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-margin-top: 30px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-font-size: 12px;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            color:
-#888;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">           
-text-align: center;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        }</p>
-<p style="margin-bottom: 0cm; line-height: 100%">    &lt;/style&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">&lt;/head&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">&lt;body&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">    &lt;div
-class=&quot;header&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        &lt;h1&gt;Análise
-Inteligente&lt;/h1&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        &lt;p&gt;Preencha
-os dados abaixo para personalizar sua experiência.&lt;/p&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">    &lt;/div&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">    &lt;div
-class=&quot;container&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        &lt;form
-action=&quot;https://formspree.io/f/mzdavyjp&quot; method=&quot;POST&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            &lt;div
-class=&quot;card&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">               
-&lt;label&gt;Qual o seu objetivo principal?&lt;/label&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">               
-&lt;input type=&quot;text&quot; name=&quot;objetivo&quot;
-placeholder=&quot;Ex: Perder peso, ganhar massa...&quot; required&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            &lt;/div&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            &lt;div
-class=&quot;card&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">               
-&lt;label&gt;Qual o seu nível de atividade física?&lt;/label&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                &lt;div
-class=&quot;options-container&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                   
-&lt;div class=&quot;option-item&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                    
-   &lt;input type=&quot;radio&quot; id=&quot;sedentario&quot;
-name=&quot;atividade&quot; value=&quot;Sedentário&quot; required&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                    
-   &lt;label for=&quot;sedentario&quot;&gt;Sedentário&lt;/label&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                   
-&lt;/div&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                   
-&lt;div class=&quot;option-item&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                    
-   &lt;input type=&quot;radio&quot; id=&quot;moderado&quot;
-name=&quot;atividade&quot; value=&quot;Moderado&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                    
-   &lt;label for=&quot;moderado&quot;&gt;Moderado (3x por
-semana)&lt;/label&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                   
-&lt;/div&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                   
-&lt;div class=&quot;option-item&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                    
-   &lt;input type=&quot;radio&quot; id=&quot;intenso&quot;
-name=&quot;atividade&quot; value=&quot;Intenso&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                    
-   &lt;label for=&quot;intenso&quot;&gt;Intenso (Todos os
-dias)&lt;/label&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">                   
-&lt;/div&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">               
-&lt;/div&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            &lt;/div&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            &lt;div
-class=&quot;card&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">               
-&lt;label&gt;Informe seu peso atual (kg):&lt;/label&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">               
-&lt;input type=&quot;number&quot; name=&quot;peso&quot;
-placeholder=&quot;Ex: 75&quot; required&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            &lt;/div&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            &lt;div
-class=&quot;card&quot;&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">               
-&lt;label&gt;Seu melhor e-mail para receber o resultado:&lt;/label&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">               
-&lt;input type=&quot;email&quot; name=&quot;email&quot;
-placeholder=&quot;nome@email.com&quot; required&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            &lt;/div&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">            &lt;button
-type=&quot;submit&quot; class=&quot;btn-submit&quot;&gt;Quero meu
-plano agora!&lt;/button&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        &lt;/form&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">    &lt;/div&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">    &lt;footer&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">        &amp;copy;
-2026 Nutri Inteligente - Todos os direitos reservados.</p>
-<p style="margin-bottom: 0cm; line-height: 100%">    &lt;/footer&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%"><br/>
-
-</p>
-<p style="margin-bottom: 0cm; line-height: 100%">&lt;/body&gt;</p>
-<p style="margin-bottom: 0cm; line-height: 100%">&lt;/html&gt;</p>
 </body>
 </html>
