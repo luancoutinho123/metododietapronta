@@ -83,7 +83,22 @@
     }
   </style>
 </head>
-<body>
+<script>
+function salvarDadosIniciais() {
+    const dados = {
+        nome: document.querySelector("#nome").value,
+        idade: document.querySelector("#idade").value,
+        peso: document.querySelector("#peso").value,
+        altura: document.querySelector("#altura").value,
+        objetivo: document.querySelector("#objetivo").value
+    };
+
+    localStorage.setItem("dadosUsuario", JSON.stringify(dados));
+
+    window.location.href = "montar.html";
+}
+</script> 
+  <body>
 
   <div class="container">
     <h2>Medidas Corporais</h2>
@@ -114,7 +129,7 @@
         <button type="button" id="feminino">Feminino</button>
       </div>
 
-      <button type="submit" class="btn">Continuar →</button>
+      <button onclick="salvarDadosIniciais()">Continuar</button>
     </form>
   </div>
 
@@ -164,3 +179,4 @@
 
 </body>
 </html>
+
