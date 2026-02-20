@@ -1,182 +1,166 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionário Nutri Inteligente</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #28a745;
-            --secondary-color: #1c1c1c;
-            --bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            --shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
+  <meta charset="UTF-8">
+  <title>Montar Dieta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--bg-gradient);
-            margin: 0;
-            padding: 20px;
-            color: var(--secondary-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    .container {
+      background: #ffffff;
+      width: 380px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
+    h2 {
+      margin: 0;
+      font-size: 20px;
+    }
 
-        .header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 0 0 10px 0;
-        }
+    p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 550px;
-        }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
 
-        .card {
-            background: #fff;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-            border-top: 5px solid var(--primary-color);
-        }
+    .gender {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
 
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 20px;
-            font-size: 17px;
-            line-height: 1.4;
-        }
+    .gender button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      cursor: pointer;
+      font-size: 14px;
+    }
 
-        input[type="text"], 
-        input[type="email"], 
-        input[type="number"] {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            outline: none;
-            transition: 0.3s;
-        }
+    .gender button.active {
+      background: #1f9d4c;
+      color: #fff;
+      border: none;
+    }
 
-        input:focus { border-color: var(--primary-color); box-shadow: 0 0 8px rgba(40,167,69,0.2); }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: #1f9d4c;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        .options-container { display: grid; gap: 12px; }
-
-        .option-item { position: relative; }
-
-        .option-item input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .option-item label {
-            display: block;
-            background: #fff;
-            border: 2px solid #eee;
-            padding: 18px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 500;
-            margin-bottom: 0;
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        .option-item input[type="radio"]:checked + label {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-            transform: scale(1.02);
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 20px;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            text-transform: uppercase;
-            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
-            transition: 0.3s;
-        }
-
-        .btn-submit:hover {
-            background: #218838;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.5);
-        }
-
-        footer { margin-top: 40px; font-size: 13px; color: #777; }
-    </style>
+    .btn:hover {
+      background: #17803d;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Análise Nutricional Personalizada</h1>
-        <p>Preencha os campos abaixo para receber seu diagnóstico por e-mail.</p>
-    </div>
+  <div class="container">
+    <h2>Medidas Corporais</h2>
+    <p>Informe suas medidas para começar</p>
 
-    <div class="container">
-        <form action="https://formspree.io/f/mzdavyjp" method="POST">
-            
-            <div class="card">
-                <label>Qual seu nome completo?</label>
-                <input type="text" name="Nome" placeholder="Digite aqui..." required>
-            </div>
+    <form id="dietForm">
+      <input type="number" id="peso" placeholder="Peso (kg)" required>
+      <input type="number" id="altura" placeholder="Altura (cm)" required>
+      <input type="number" id="idade" placeholder="Idade (anos)" required>
 
-            <div class="card">
-                <label>Qual seu principal objetivo hoje?</label>
-                <div class="options-container">
-                    <div class="option-item">
-                        <input type="radio" id="obj1" name="Objetivo" value="Emagrecer" required>
-                        <label for="obj1">Emagrecer Saudável</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="radio" id="obj2" name="Objetivo" value="Massa">
-                        <label for="obj2">Ganhar Massa Muscular</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="radio" id="obj3" name="Objetivo" value="Energia">
-                        <label for="obj3">Ter mais Energia e Disposição</label>
-                    </div>
-                </div>
-            </div>
+      <select id="objetivo" required>
+        <option value="">Selecione seu objetivo</option>
+        <option value="emagrecer">Emagrecer</option>
+        <option value="manter">Manter peso</option>
+        <option value="ganhar">Ganhar massa</option>
+      </select>
 
-            <div class="card">
-                <label>Seu melhor e-mail para receber o plano:</label>
-                <input type="email" name="_replyto" placeholder="exemplo@email.com" required>
-            </div>
+      <select id="calorias" required>
+        <option value="">Calorias desejadas por dia</option>
+        <option value="1500">1500 kcal</option>
+        <option value="1800">1800 kcal</option>
+        <option value="2000">2000 kcal</option>
+        <option value="2500">2500 kcal</option>
+      </select>
 
-            <button type="submit" class="btn-submit">Gerar Meu Plano Agora</button>
-            
-            <input type="hidden" name="_subject" value="Novo Lead: Questionário Nutri">
-        </form>
-    </div>
+      <div class="gender">
+        <button type="button" id="masculino">Masculino</button>
+        <button type="button" id="feminino">Feminino</button>
+      </div>
 
-    <footer>
-        &copy; 2026 Nutri Inteligente | Tecnologia de Análise de Dados
-    </footer>
+      <button type="submit" class="btn">Continuar →</button>
+    </form>
+  </div>
+
+  <script>
+    let sexoSelecionado = "";
+
+    const masculinoBtn = document.getElementById("masculino");
+    const femininoBtn = document.getElementById("feminino");
+
+    masculinoBtn.addEventListener("click", () => {
+      sexoSelecionado = "Masculino";
+      masculinoBtn.classList.add("active");
+      femininoBtn.classList.remove("active");
+    });
+
+    femininoBtn.addEventListener("click", () => {
+      sexoSelecionado = "Feminino";
+      femininoBtn.classList.add("active");
+      masculinoBtn.classList.remove("active");
+    });
+
+    document.getElementById("dietForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const dados = {
+        peso: document.getElementById("peso").value,
+        altura: document.getElementById("altura").value,
+        idade: document.getElementById("idade").value,
+        objetivo: document.getElementById("objetivo").value,
+        calorias: document.getElementById("calorias").value,
+        sexo: sexoSelecionado
+      };
+
+      if (!dados.sexo) {
+        alert("Selecione o sexo");
+        return;
+      }
+
+      // Salvar no localStorage
+      localStorage.setItem("dadosDieta", JSON.stringify(dados));
+
+      // 🔥🔥🔥 COLOQUE AQUI O NOME DO ARQUIVO DA PRÓXIMA PÁGINA 🔥🔥🔥
+      window.location.href = "montar-dieta.html";
+      // Exemplo: "refeicoes.html"
+    });
+  </script>
 
 </body>
 </html>
