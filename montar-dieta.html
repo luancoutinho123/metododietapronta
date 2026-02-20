@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montar Dieta - Passo 2</title>
+    <style>
+        :root {
+            --bg-color: #f5f7f9;
+            --white: #ffffff;
+            --primary-green: #27ae60;
+            --light-green: #e8f5e9;
+            --gray-border: #ddd;
+            --text-dark: #333;
+            --text-gray: #666;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding-bottom: 100px; /* Espaço para a barra de progresso fixa se necessário, ou apenas respiro */
+        }
+
+        section {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .title-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .emoji-large { font-size: 1.8rem; }
+        
+        h2 { margin: 0; font-size: 1.25rem; }
+        
+        .counter {
+            font-size: 0.85rem;
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        /* Grid de Alimentos */
+        .grid-alimentos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 12px;
+        }
+
+        .card-alimento {
+            background: var(--white);
+            border: 1px solid var(--gray-border);
+            border-radius: 12px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            user-select: none;
+        }
+
+        .card-alimento span:first-child {
+            font-size: 1.5rem;
+        }
+
+        .card-alimento p {
+            margin: 0;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Estados de Seleção */
+        .card-alimento.selected {
+            background-color: var(--light-green);
+            border-color: var(--primary-green);
+        }
+
+        /* Bloco Chocolate */
+        .select-custom {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--gray-border);
+            background: var(--white);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        /* Barra de Progresso */
+        .progress-container {
+            position: sticky;
+            bottom: 20px;
+            background: var(--white);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+
+        .progress-bar-bg {
+            background: #eee;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar-fill {
+            background: var(--primary-green);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* Botões */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn-back { background: #e0e0e0; color: #333; }
+        .btn-next { background: var(--primary-green); color: white; }
+        .btn:active { opacity: 0.8; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <section id="sec-cafe">
+        <div class="section-header">
+            <div class="title-group">
+                <span class="emoji-large">☕</span>
+                <h2>Café da Manhã</h2>
+            </div>
+            <span class="counter" id="count-cafe">0 selecionado(s)</span>
+        </div>
+        <p class="subtitle">Monte seu café da manhã selecionando alimentos de cada categoria</p>
+        <div class="grid-alimentos" id="grid-cafe">
+            </div>
+    </section>
+
+    <section id="sec-lanche-manha">
+        <div class="section-header">
+            <div class="title-group">
+                <span class="emoji-large">🍎</span>
+                <h2>Lanche da Manhã</h2>
+            </div>
+        </div>
+        <p class="subtitle">Adicione um lanche da manhã à sua dieta (Opcional)</p>
+        <div class="grid-alimentos" id="grid-lanche-manha"></div>
+    </section>
+
+    <section id="sec-almoco">
+        <div class="section-header">
+            <div class="title-group">
+                <span class="emoji-large">🍽️</span>
+                <h2>Almoço</h2>
+            </div>
+            <span class="counter" id="count-almoco">0 selecionado(s)</span>
+        </div>
+        <p class="subtitle">Monte seu almoço selecionando alimentos de cada categoria</p>
+        <div class="grid-alimentos" id="grid-almoco"></div>
+    </section>
+
+    <section id="sec-lanche">
+        <div class="section-header">
+            <div class="title-group">
+                <span class="emoji-large">🍪</span>
+                <h2>Lanche da Tarde</h2>
+            </div>
+            <span class="counter" id="count-lanche">0 selecionado(s)</span>
+        </div>
+        <p class="subtitle">Selecione os itens do seu lanche da tarde</p>
+        <div class="grid-alimentos" id="grid-lanche"></div>
+    </section>
+
+    <section id="sec-janta">
+        <div class="section-header">
+            <div class="title-group">
+                <span class="emoji-large">🌙</span>
+                <h2>Janta</h2>
+            </div>
+            <span class="counter" id="count-janta">0 selecionado(s)</span>
+        </div>
+        <p class="subtitle">Selecione os itens da sua janta</p>
+        <div class="grid-alimentos" id="grid-janta"></div>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <div class="title-group">
+                <span class="emoji-large">🍫</span>
+                <h2>Chocolate</h2>
+            </div>
+        </div>
+        <p class="subtitle">Deseja incluir chocolate nas suas refeições?</p>
+        <select class="select-custom" id="select-chocolate" onchange="updateProgress()">
+            <option value="">Selecione uma opção...</option>
+            <option value="nao">❌ Não, não quero chocolate</option>
+            <option value="branco">🤍 Chocolate Branco</option>
+            <option value="preto">🍫 Chocolate Preto</option>
+        </select>
+    </section>
+
+    <div class="progress-container">
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+        <div class="button-group">
+            <button class="btn btn-back" onclick="history.back()">Voltar</button>
+            <button class="btn btn-next" onclick="validarEContinuar()">Continuar</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Dados dos alimentos
+    const cafeItens =
