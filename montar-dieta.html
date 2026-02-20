@@ -23,17 +23,13 @@
             background-color: var(--bg-color);
             font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 20px 0 100px 0;
+            padding: 20px 0 120px 0;
             color: var(--text-main);
             display: flex;
             justify-content: center;
         }
 
-        .container {
-            width: 100%;
-            max-width: 600px;
-            padding: 0 15px;
-        }
+        .container { width: 100%; max-width: 600px; padding: 0 15px; }
 
         section {
             background: var(--white);
@@ -41,33 +37,32 @@
             border-radius: 14px;
             padding: 20px;
             margin-bottom: 25px;
-            shadow: var(--shadow);
+            box-shadow: var(--shadow);
         }
 
         h2 { font-size: 1.2rem; margin-top: 0; display: flex; align-items: center; gap: 10px; }
-        .subtitle { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .counter { font-size: 0.85rem; font-weight: bold; padding: 4px 8px; border-radius: 20px; background: #eee; }
 
-        /* Grid de Alimentos */
         .food-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
         }
 
         .food-card {
             position: relative;
             background: var(--white);
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--border-color);
             border-radius: 12px;
-            padding: 15px;
+            padding: 12px 8px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 120px;
+            min-height: 100px;
         }
 
         .food-card.selected {
@@ -76,325 +71,60 @@
         }
 
         .food-card .icon { font-size: 24px; margin-bottom: 8px; }
-        .food-card span { font-size: 0.85rem; font-weight: 500; line-height: 1.2; }
+        .food-card span { font-size: 0.75rem; font-weight: 600; color: var(--text-main); display: block; }
 
         .check-btn {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            width: 22px;
-            height: 22px;
+            top: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             border: 1px solid var(--border-color);
             background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
         }
 
-        .food-card.selected .check-btn {
-            background: var(--primary-green);
-            border-color: var(--primary-green);
-        }
+        .food-card.selected .check-btn { background: var(--primary-green); border-color: var(--primary-green); }
+        .food-card.selected .check-btn::after { content: '✓'; color: white; font-size: 10px; }
 
-        .check-btn::after {
-            content: '✓';
-            color: transparent;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .food-card.selected .check-btn::after { color: white; }
-
-        /* Status Section */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .counter { font-size: 0.8rem; font-weight: bold; color: var(--primary-green); }
-
-        /* Chocolate Section */
         .chocolate-select {
             width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
             font-size: 1rem;
-            outline: none;
+            appearance: none;
+            background: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 15px center;
         }
 
         .skip-link {
             display: block;
             text-align: center;
             margin-top: 15px;
-            color: var(--text-muted);
-            text-decoration: underline;
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: 600;
             font-size: 0.85rem;
             cursor: pointer;
         }
 
-        /* Footer Progress */
         .footer-nav {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             background: white;
             padding: 15px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 100;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .progress-container {
-            width: 100%;
-            max-width: 600px;
-            height: 8px;
-            background: #eee;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
+        .progress-container { width: 100%; max-width: 600px; height: 8px; background: #eee; border-radius: 10px; margin-bottom: 12px; }
+        #main-progress-bar { height: 100%; width: 0%; background: var(--primary-green); border-radius: 10px; transition: 0.3s; }
 
-        #main-progress-bar {
-            height: 100%;
-            width: 0%;
-            background: var(--primary-green);
-            transition: width 0.3s ease;
-        }
-
-        .buttons-row {
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            gap: 10px;
-        }
-
-        button {
-            flex: 1;
-            padding: 14px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn-back { background: #eee; color: #666; }
-        .btn-next { background: var(--primary-green); color: white; }
-
-        @media (max-width: 400px) {
-            .food-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <section id="sec-cafeManha">
-        <div class="section-header">
-            <h2>☕ Café da Manhã</h2>
-            <span class="counter" id="count-cafeManha">0/3</span>
-        </div>
-        <div class="food-grid" id="grid-cafeManha"></div>
-    </section>
-
-    <section id="sec-almoco">
-        <div class="section-header">
-            <h2>🍽️ Almoço</h2>
-            <span class="counter" id="count-almoco">0/3</span>
-        </div>
-        <div class="food-grid" id="grid-almoco"></div>
-    </section>
-
-    <section id="sec-lancheTarde">
-        <div class="section-header">
-            <h2>🍪 Lanche da Tarde</h2>
-            <span class="counter" id="count-lancheTarde">0/3</span>
-        </div>
-        <div class="food-grid" id="grid-lancheTarde"></div>
-    </section>
-
-    <section id="sec-janta">
-        <div class="section-header">
-            <h2>🌙 Janta</h2>
-            <span class="counter" id="count-janta">0/3</span>
-        </div>
-        <div class="food-grid" id="grid-janta"></div>
-    </section>
-
-    <section id="sec-lancheManha">
-        <div class="section-header">
-            <h2>🍎 Lanche da Manhã</h2>
-            <small>(Opcional)</small>
-        </div>
-        <div class="food-grid" id="grid-lancheManha"></div>
-        <span class="skip-link" onclick="pularLancheManha()">Não quero lanche da manhã</span>
-    </section>
-
-    <section>
-        <h2>🍫 Chocolate</h2>
-        <p class="subtitle">Deseja incluir chocolate nas suas refeições?</p>
-        <select class="chocolate-select" id="select-chocolate" onchange="atualizarChocolate(this.value)">
-            <option value="">Selecione uma opção...</option>
-            <option value="Não quero chocolate">Não quero chocolate</option>
-            <option value="Chocolate Branco">Chocolate Branco</option>
-            <option value="Chocolate Preto">Chocolate Preto</option>
-        </select>
-    </section>
-</div>
-
-<div class="footer-nav">
-    <div class="progress-container">
-        <div id="main-progress-bar"></div>
-    </div>
-    <div class="buttons-row">
-        <button class="btn-back" onclick="history.back()">Voltar</button>
-        <button class="btn-next" onclick="validarEContinuar()">Continuar</button>
-    </div>
-</div>
-
-<script>
-    // Configuração de dados e itens
-    const itensCafeLanche = ["Pão + Frango", "Pão + Ovo", "Pão + Queijo", "Pão + Presunto e Queijo", "Tapioca de Queijo", "Tapioca de Frango", "Cuscuz + Ovo", "Pão de Queijo", "Omelete", "Maçã", "Banana", "Mamão", "Café + Leite Desnatado", "Café", "Iogurte"];
-    const itensRefeicaoGeral = ["Arroz", "Feijão Preto", "Cuscuz", "Macarrão", "Batata Doce", "Mandioca", "Inhame", "Batata Inglesa", "Abóbora", "Frango Grelhado", "Carne Assada", "Carne Grelhada", "Carne de Porco Lombo", "Patinho Moído", "Peixe", "Salada de Alface e Tomate", "Salada de Alface", "Salada de Legumes"];
-    const itensFrutasOpcional = ["Maçã", "Banana", "Laranja", "Abacaxi", "Mamão", "Morango", "Melancia", "Melão", "Whey Protein", "Biscoito de Polvilho", "Biscoito de Água e Sal", "Biscoito de Arroz"];
-
-    let dadosDieta = {
-        cafeManha: [],
-        almoco: [],
-        lancheTarde: [],
-        janta: [],
-        lancheManha: [],
-        semLancheManha: false,
-        chocolate: ""
-    };
-
-    // Inicialização
-    window.onload = () => {
-        carregarLocalStorage();
-        renderizarGrids();
-        atualizarInterface();
-    };
-
-    function renderizarGrids() {
-        renderGrid('grid-cafeManha', itensCafeLanche, 'cafeManha');
-        renderGrid('grid-almoco', itensRefeicaoGeral, 'almoco');
-        renderGrid('grid-lancheTarde', itensCafeLanche, 'lancheTarde');
-        renderGrid('grid-janta', itensRefeicaoGeral, 'janta');
-        renderGrid('grid-lancheManha', itensFrutasOpcional, 'lancheManha');
-        
-        document.getElementById('select-chocolate').value = dadosDieta.chocolate;
-    }
-
-    function renderGrid(containerId, lista, chave) {
-        const container = document.getElementById(containerId);
-        container.innerHTML = '';
-        lista.forEach(item => {
-            const isSelected = dadosDieta[chave].includes(item);
-            const card = document.createElement('div');
-            card.className = `food-card ${isSelected ? 'selected' : ''}`;
-            card.onclick = () => toggleSelecao(chave, item);
-            
-            card.innerHTML = `
-                <div class="check-btn"></div>
-                <div class="icon">${getEmoji(item)}</div>
-                <span>${item}</span>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function toggleSelecao(chave, item) {
-        const index = dadosDieta[chave].indexOf(item);
-        if (index > -1) {
-            dadosDieta[chave].splice(index, 1);
-        } else {
-            dadosDieta[chave].push(item);
-        }
-        
-        if(chave === 'lancheManha') dadosDieta.semLancheManha = false;
-        
-        renderizarGrids();
-        atualizarInterface();
-    }
-
-    function pularLancheManha() {
-        dadosDieta.lancheManha = [];
-        dadosDieta.semLancheManha = true;
-        renderizarGrids();
-        atualizarInterface();
-    }
-
-    function atualizarChocolate(valor) {
-        dadosDieta.chocolate = valor;
-        atualizarInterface();
-    }
-
-    function atualizarInterface() {
-        // Atualizar Contadores
-        const chaves = ['cafeManha', 'almoco', 'lancheTarde', 'janta'];
-        chaves.forEach(k => {
-            const count = dadosDieta[k].length;
-            document.getElementById(`count-${k}`).innerText = `${count}/3`;
-            document.getElementById(`count-${k}`).style.color = count >= 3 ? '#2ecc71' : '#e74c3c';
-        });
-
-        // Calcular Progresso Geral (5 etapas = 20% cada)
-        let progresso = 0;
-        if (dadosDieta.cafeManha.length >= 3) progresso += 20;
-        if (dadosDieta.almoco.length >= 3) progresso += 20;
-        if (dadosDieta.lancheTarde.length >= 3) progresso += 20;
-        if (dadosDieta.janta.length >= 3) progresso += 20;
-        if (dadosDieta.chocolate !== "") progresso += 20;
-
-        document.getElementById('main-progress-bar').style.width = progresso + '%';
-    }
-
-    function validarEContinuar() {
-        const errors = [];
-        if (dadosDieta.cafeManha.length < 3) errors.push("Selecione ao menos 3 itens no Café da Manhã.");
-        if (dadosDieta.almoco.length < 3) errors.push("Selecione ao menos 3 itens no Almoço.");
-        if (dadosDieta.lancheTarde.length < 3) errors.push("Selecione ao menos 3 itens no Lanche da Tarde.");
-        if (dadosDieta.janta.length < 3) errors.push("Selecione ao menos 3 itens na Janta.");
-        if (!dadosDieta.chocolate) errors.push("Por favor, selecione uma opção de Chocolate.");
-
-        if (errors.length > 0) {
-            alert("Atenção:\n\n" + errors.join("\n"));
-            return;
-        }
-
-        localStorage.setItem("dadosDieta", JSON.stringify(dadosDieta));
-        window.location.href = "resumo.html";
-    }
-
-    function carregarLocalStorage() {
-        const salvo = localStorage.getItem("dadosDieta");
-        if (salvo) {
-            dadosDieta = JSON.parse(salvo);
-        }
-    }
-
-    function getEmoji(nome) {
-        const mapa = {
-            "Pão": "🍞", "Frango": "🍗", "Ovo": "🍳", "Queijo": "🧀", "Tapioca": "⚪", 
-            "Cuscuz": "🌽", "Omelete": "🥘", "Maçã": "🍎", "Banana": "🍌", "Mamão": "🍈",
-            "Café": "☕", "Iogurte": "🥛", "Arroz": "🍚", "Feijão": "🍲", "Macarrão": "🍝",
-            "Batata": "🥔", "Mandioca": "🍠", "Peixe": "🐟", "Salada": "🥗", "Carne": "🥩",
-            "Chocolate": "🍫", "Whey": "🥤", "Biscoito": "🍪", "Laranja": "🍊", "Morango": "🍓"
-        };
-        for (let key in mapa) {
-            if (nome.includes(key)) return mapa[key];
-        }
-        return "🍴";
-    }
-</script>
-
-</body>
-</html>
+        .buttons-row { width: 100%; max-width: 600px; display: flex; gap: 10px; }
+        button { flex: 1; padding: 15px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; }
+        .btn-back
