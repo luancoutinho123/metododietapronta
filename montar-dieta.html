@@ -1,10 +1,423 @@
-<section>
-  <div class="section-header">
-    <h2>☕ Café da Manhã</h2>
-    <span class="counter">0/3</span>
-  </div>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Dieta Pronta | Plano Personalizado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f5f7f9;
+            --white: #ffffff;
+            --primary: #2ecc71;
+            --primary-light: #e8f8f0;
+            --text-main: #2c3e50;
+            --text-muted: #7f8c8d;
+            --border-radius: 14px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
 
-  <div class="food-grid">
-    <!-- AS FOOD CARDS PRECISAM ESTAR AQUI DENTRO -->
-  </div>
-</section>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 100px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 { font-weight: 700; font-size: 1.5rem; margin-bottom: 8px; }
+
+        /* Estilo dos Cards de Refeição */
+        .meal-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .meal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .meal-title h2 { font-size: 1.1rem; font-weight: 600; }
+        .meal-title p { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+
+        .counter {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        /* Grid de Opções */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .option-card {
+            border: 1.5px solid #edf2f7;
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .option-card span:first-child { font-size: 1.4rem; }
+        .option-card span:last-child { font-size: 0.75rem; font-weight: 500; }
+
+        .option-card .check-circle {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid #dcdde1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            transition: var(--transition);
+        }
+
+        /* Estados Selecionados */
+        .option-card.selected {
+            border-color: var(--primary);
+            background-color: var(--primary-light);
+        }
+
+        .option-card.selected .check-circle {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .option-card.selected .check-circle::after {
+            content: '✓';
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .option-card.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Seção Lanche da Manhã Bloqueio */
+        .skip-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: var(--text-muted);
+            text-decoration: underline;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .section-disabled {
+            pointer-events: none;
+            opacity: 0.6;
+            filter: grayscale(1);
+        }
+
+        /* Dropdown Chocolate */
+        .select-container {
+            margin-top: 10px;
+            position: relative;
+        }
+
+        select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 2px solid #edf2f7;
+            appearance: none;
+            background: var(--white);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+            outline: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        select:focus { border-color: var(--primary); }
+
+        /* Barra de Progresso Fixa */
+        .progress-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 20px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .progress-container {
+            width: 100%;
+            max-width: 560px;
+            height: 8px;
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 400px) {
+            .options-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Método Dieta Pronta</h1>
+        <p style="color: var(--text-muted)">Personalize seu cardápio diário</p>
+    </header>
+
+    <section class="meal-section" id="cafe">
+        <div class="meal-header">
+            <div class="meal-title">
+                <h2>☕ Café da Manhã</h2>
+                <p>Escolha até 3 opções para seu café da manhã</p>
+            </div>
+            <div class="counter" id="count-cafe">0/3</div>
+        </div>
+        <div class="options-grid" data-limit="3" data-target="cafe">
+            <div class="option-card"><span>🍳</span><span>Ovo</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🥖</span><span>Pão</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🧀</span><span>Queijo</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🧈</span><span>Manteiga</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>☕</span><span>Café</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🥛</span><span>Leite</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍌</span><span>Banana</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍎</span><span>Maçã</span><div class="check-circle"></div></div>
+        </div>
+    </section>
+
+    <section class="meal-section" id="lanche-m">
+        <div class="meal-header">
+            <div class="meal-title">
+                <h2>🍓 Lanche da Manhã</h2>
+                <p>Escolha lanches saudáveis para o meio da manhã</p>
+            </div>
+            <div class="counter" id="count-lanche-m">0/3</div>
+        </div>
+        <div class="options-grid" data-limit="3" data-target="lanche-m">
+            <div class="option-card"><span>🍎</span><span>Maçã</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍌</span><span>Banana</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍊</span><span>Laranja</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍍</span><span>Abacaxi</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍈</span><span>Mamão</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍓</span><span>Morango</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍉</span><span>Melancia</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍈</span><span>Melão</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🥤</span><span>Whey</span><div class="check-circle"></div></div>
+        </div>
+        <a class="skip-link" onclick="skipSection('lanche-m')">Não quero lanche da manhã</a>
+    </section>
+
+    <section class="meal-section" id="almoco">
+        <div class="meal-header">
+            <div class="meal-title">
+                <h2>🍽️ Almoço</h2>
+                <p>Monte seu almoço selecionando até 3 itens</p>
+            </div>
+            <div class="counter" id="count-almoco">0/3</div>
+        </div>
+        <div class="options-grid" data-limit="3" data-target="almoco">
+            <div class="option-card"><span>🍚</span><span>Arroz</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🫘</span><span>Feijão</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍗</span><span>Frango</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🥩</span><span>Carne</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍝</span><span>Macarrão</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍠</span><span>Batata Doce</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🥗</span><span>Salada</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🐟</span><span>Peixe</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🎃</span><span>Abóbora</span><div class="check-circle"></div></div>
+        </div>
+    </section>
+
+    <section class="meal-section" id="lanche-t">
+        <div class="meal-header">
+            <div class="meal-title">
+                <h2>🍪 Lanche da Tarde</h2>
+                <p>Monte seu lanche da tarde</p>
+            </div>
+            <div class="counter" id="count-lanche-t">0/3</div>
+        </div>
+        <div class="options-grid" data-limit="3" data-target="lanche-t">
+            <div class="option-card"><span>🥪</span><span>Pão+Frango</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🫓</span><span>Tapioca</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🧀</span><span>Pão Queijo</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍳</span><span>Omelete</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🥛</span><span>Iogurte</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍎</span><span>Maçã</span><div class="check-circle"></div></div>
+        </div>
+    </section>
+
+    <section class="meal-section" id="janta">
+        <div class="meal-header">
+            <div class="meal-title">
+                <h2>🌙 Janta</h2>
+                <p>Selecione até 3 opções para sua janta</p>
+            </div>
+            <div class="counter" id="count-janta">0/3</div>
+        </div>
+        <div class="options-grid" data-limit="3" data-target="janta">
+            <div class="option-card"><span>🍚</span><span>Arroz</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🫘</span><span>Feijão</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍗</span><span>Frango</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🥩</span><span>Carne</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🍠</span><span>Batata</span><div class="check-circle"></div></div>
+            <div class="option-card"><span>🥗</span><span>Salada</span><div class="check-circle"></div></div>
+        </div>
+    </section>
+
+    <section class="meal-section">
+        <div class="meal-title">
+            <h2>🍫 Chocolate</h2>
+            <p>Escolha sua preferência</p>
+        </div>
+        <div class="select-container">
+            <select id="chocolate-select" onchange="updateProgress()">
+                <option value="none">Não quero chocolate</option>
+                <option value="branco">Chocolate Branco</option>
+                <option value="preto">Chocolate Preto</option>
+            </select>
+        </div>
+    </section>
+</div>
+
+<div class="progress-footer">
+    <div class="progress-container">
+        <div class="progress-bar" id="main-progress"></div>
+    </div>
+    <div class="progress-text">Progresso do Perfil: <span id="progress-perc">0%</span></div>
+</div>
+
+<script>
+    const allGrids = document.querySelectorAll('.options-grid');
+    const totalPossibleSelections = 15; // 5 seções * 3 opções
+
+    allGrids.forEach(grid => {
+        const cards = grid.querySelectorAll('.option-card');
+        const target = grid.dataset.target;
+        const limit = parseInt(grid.dataset.limit);
+        const counter = document.getElementById(`count-${target}`);
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const selectedInGrid = grid.querySelectorAll('.selected').length;
+                
+                if (card.classList.contains('selected')) {
+                    card.classList.remove('selected');
+                } else {
+                    if (selectedInGrid < limit) {
+                        card.classList.add('selected');
+                    }
+                }
+                
+                // Atualizar contador da seção
+                const nowSelected = grid.querySelectorAll('.selected').length;
+                counter.innerText = `${nowSelected}/${limit}`;
+                updateProgress();
+            });
+        });
+    });
+
+    function skipSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        const grid = section.querySelector('.options-grid');
+        const counter = document.getElementById(`count-${sectionId}`);
+        
+        // Limpar seleções
+        grid.querySelectorAll('.selected').forEach(c => c.classList.remove('selected'));
+        
+        // Bloquear visualmente
+        section.classList.toggle('section-disabled');
+        
+        if(section.classList.contains('section-disabled')) {
+            counter.innerText = "0/3";
+        }
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const totalSelected = document.querySelectorAll('.selected').length;
+        // Simulação de progresso baseada em preenchimento
+        let progress = (totalSelected / totalPossibleSelections) * 100;
+        
+        // Adiciona um extra se chocolate estiver selecionado (diferente de 'none')
+        if(document.getElementById('chocolate-select').value !== 'none') {
+            progress += 5;
+        }
+
+        const bar = document.getElementById('main-progress');
+        const text = document.getElementById('progress-perc');
+        
+        const finalVal = Math.min(Math.round(progress), 100);
+        bar.style.width = finalVal + '%';
+        text.innerText = finalVal + '%';
+    }
+</script>
+
+</body>
+</html>
